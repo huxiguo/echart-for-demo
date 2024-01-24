@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import type { ECElementEvent } from "echarts"
+import echarts from "./echart/echart.config"
 
 import Echart from "./echart/index.vue"
 import type { ECOption } from "./echart/echart.config"
@@ -57,7 +57,7 @@ const options = ref<ECOption>({
 		},
 	],
 })
-const handleClick = (params: ECElementEvent) => {
+const handleClick = (params: echarts.ECElementEvent) => {
 	alert(params.name)
 }
 </script>
