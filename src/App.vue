@@ -17,7 +17,7 @@ const options = ref<ECOption>({
 		realtime: false,
 		calculable: true,
 		inRange: {
-			color: ["lightskyblue", "yellow", "orangered"],
+			color: ["#74e7e9", "#78d6d7", "#479ca8"],
 		},
 	},
 	series: [
