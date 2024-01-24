@@ -31,7 +31,7 @@ const draw = async () => {
 			geoJsonData = res.data
 		}
 		echarts.registerMap(props.name, geoJsonData as any)
-		chartInstance.value.setOption(props.option, { notMerge: false })
+		chartInstance.value.setOption(props.option, { notMerge: true })
 	}
 }
 

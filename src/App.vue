@@ -34,6 +34,7 @@ const options = computed<ECOption>(() => {
 				label: {
 					show: true,
 				},
+				center: undefined,
 				// 高亮效果
 				emphasis: {
 					label: {
