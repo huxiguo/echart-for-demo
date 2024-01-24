@@ -12,10 +12,7 @@ interface Props {
 	theme?: Object | string
 	width: string
 	height: string
-	// 直接传入 geoJson 数据
-	geoJson?: any
-	// 通过 url 加载 geoJson 数据
-	geoJsonUrl?: string
+	name: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,14 +26,12 @@ const chartInstance = ref<EChartsType>()
 const draw = async () => {
 	if (chartInstance.value) {
 		let geoJsonData = null
-		if (props.geoJsonUrl) {
-			const res = await axios.get(`${props.geoJsonUrl}`)
+		if (props.name) {
+			const res = await axios.get(`/data/${props.name}.json`)
 			geoJsonData = res.data
-		} else if (props.geoJson) {
-			geoJsonData = props.geoJson
 		}
-		echarts.registerMap("jiujiang", geoJsonData as any)
-		chartInstance.value.setOption(props.option, { notMerge: true })
+		echarts.registerMap(props.name, geoJsonData as any)
+		chartInstance.value.setOption(props.option, { notMerge: false })
 	}
 }
 
@@ -95,6 +90,8 @@ const handleClick = () => {
 		emit("itemClick", params)
 	})
 }
+
+defineExpose({ draw })
 </script>
 
 <template>
