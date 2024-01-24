@@ -12,6 +12,10 @@ interface Props {
 	theme?: Object | string
 	width: string
 	height: string
+	// 直接传入 geoJson 数据
+	geoJson?: any
+	// 通过 url 加载 geoJson 数据
+	geoJsonUrl?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -24,10 +28,14 @@ const chartInstance = ref<EChartsType>()
 // 绘制图表
 const draw = async () => {
 	if (chartInstance.value) {
-		const jiujiang = await axios.get(
-			"https://geojson.cn/api/data/360000/360400.json"
-		)
-		echarts.registerMap("jiujiang", jiujiang.data)
+		let geoJsonData = null
+		if (props.geoJsonUrl) {
+			const res = await axios.get(`${props.geoJsonUrl}`)
+			geoJsonData = res.data
+		} else if (props.geoJson) {
+			geoJsonData = props.geoJson
+		}
+		echarts.registerMap("jiujiang", geoJsonData as any)
 		chartInstance.value.setOption(props.option, { notMerge: true })
 	}
 }

@@ -5,6 +5,10 @@ import echarts from "./echart/echart.config"
 import Echart from "./echart/index.vue"
 import type { ECOption } from "./echart/echart.config"
 
+import jiujiangJson from "./data/jiujiang.json"
+
+const jiujiangJsonUrl = "https://geojson.cn/api/data/360000/360400.json"
+
 const options = ref<ECOption>({
 	tooltip: {
 		trigger: "item",
@@ -68,6 +72,8 @@ const handleClick = (params: echarts.ECElementEvent) => {
 			width="100%"
 			height="800px"
 			@item-click="handleClick"
+			:geo-json="jiujiangJson"
+			:geo-json-url="jiujiangJsonUrl"
 		/>
 	</div>
 </template>
